@@ -12,6 +12,14 @@
 ///       - asset: fonts/MyFlutterApp.ttf
 ///
 /// 
+/// * Font Awesome 4, Copyright (C) 2016 by Dave Gandy
+///         Author:    Dave Gandy
+///         License:   SIL ()
+///         Homepage:  http://fortawesome.github.com/Font-Awesome/
+/// * Octicons, Copyright (C) 2020 by GitHub Inc.
+///         Author:    GitHub
+///         License:   MIT (http://opensource.org/licenses/mit-license.php)
+///         Homepage:  https://primer.style/octicons/
 ///
 import 'package:flutter/widgets.dart';
 
@@ -24,4 +32,6 @@ class MyFlutterApp {
   static const IconData profileicon = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData servicesicon = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData homeicon = IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData sliders = IconData(0xf1de, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData settings = IconData(0xf36c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
