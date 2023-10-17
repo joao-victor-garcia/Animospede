@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'login.dart';
 
-class SplashPage extends StatelessWidget  {
-  const SplashPage({Key? key}) : super(key: key);   
+class SplashPage extends StatelessWidget {
+  const SplashPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,8 @@ class SplashPage extends StatelessWidget  {
       const Duration(seconds: 2),
       () {
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const LoginPage(title: 'Animóspede')),
+          MaterialPageRoute(
+              builder: (context) => const LoginPage(title: 'Animóspede')),
         );
       },
     );
@@ -23,12 +24,10 @@ class SplashPage extends StatelessWidget  {
             color: const Color(0xFFFF8E54),
             child: Stack(
               children: [
-                const Center(
+                Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image(image: AssetImage('logo.png')),
-                    ],
+                    children: [Image.asset('assets/logo.png')],
                   ),
                 ),
                 Center(
@@ -37,10 +36,7 @@ class SplashPage extends StatelessWidget  {
                     children: [
                       SizedBox(
                         width: 250,
-                        child: Image.asset(
-                          'homeIndicator.png',
-                          height: 25,
-                        ),
+                        child: Image.asset('assets/homeIndicator.png', height: 25),
                       )
                     ],
                   ),

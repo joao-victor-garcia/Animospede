@@ -129,53 +129,63 @@ Widget _buildCard(
             bottomLeft: Radius.circular(12.0),
           ),
           child: SizedBox(
-            width: 150, // Largura da imagem à esquerda
-            height: double.infinity, // A imagem ocupará toda a altura
+            width: 130,
+            height: double.infinity,
             child: Image.asset(
               imagePath,
-              fit: BoxFit
-                  .cover, // Redimensionar a imagem para preencher a altura
+              fit: BoxFit.cover,
             ),
           ),
         ),
         Expanded(
           child: Column(
-            mainAxisAlignment:
-                MainAxisAlignment.center, // Alinhe verticalmente no centro
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ListTile(
-                title: Text(
-                  title,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-                subtitle: Row(
-                  children: [
-                    const Icon(
-                      Icons.pin_drop_outlined,
-                      color: Color(0xFF5533EA),
-                      size: 16,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 3),
-                      child: Text(
-                        subtitle,
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16),
-                child: Text(
-                  text,
-                  style: const TextStyle(
-                    fontSize: 13,
+                padding: const EdgeInsets.all(15),
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Stack(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.pin_drop_outlined,
+                                color: Color(0xFF5533EA),
+                                size: 16,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 3),
+                                child: Text(
+                                  subtitle,
+                                  style: const TextStyle(fontSize: 16),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            text,
+                            style: const TextStyle(
+                              fontSize: 13,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
