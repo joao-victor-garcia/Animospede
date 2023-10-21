@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
+import 'content.dart';
+import 'register.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key, required this.title});
@@ -11,14 +12,20 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  Color buttonColor = const Color(0xFFFF8E54);
   Color fieldColor = const Color.fromRGBO(255, 255, 255, 0.25);
   double borderRadius = 10;
 
   void handleLogin() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const HomePage()),
+      MaterialPageRoute(builder: (context) => const ContentPage()),
+    );
+  }
+
+  void handleRegister() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const RegisterPage()),
     );
   }
 
@@ -117,7 +124,8 @@ class _LoginPageState extends State<LoginPage> {
                       ElevatedButton(
                         onPressed: handleLogin,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: buttonColor,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
                           foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(borderRadius),
@@ -130,9 +138,10 @@ class _LoginPageState extends State<LoginPage> {
                         height: 14,
                       ),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: handleRegister,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: buttonColor,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
                           foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(borderRadius),

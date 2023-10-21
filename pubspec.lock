@@ -115,6 +115,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
+  passwordfield:
+    dependency: "direct main"
+    description:
+      name: passwordfield
+      sha256: d7a1e81f0f5a2ab9404a3e595c27cc9405356f1d1ab8120ea81fe689ebbab29a
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0"
   path:
     dependency: transitive
     description:
@@ -194,3 +202,4 @@ packages:
     version: "0.1.4-beta"
 sdks:
   dart: ">=3.1.0 <4.0.0"
+  flutter: ">=1.17.0"

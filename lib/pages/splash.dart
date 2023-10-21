@@ -21,7 +21,7 @@ class SplashPage extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            color: const Color(0xFFFF8E54),
+            color: Theme.of(context).colorScheme.primary,
             child: Stack(
               children: [
                 Center(

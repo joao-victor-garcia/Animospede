@@ -14,7 +14,8 @@ class MyApp extends StatelessWidget {
       title: 'Animóspede',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color.fromARGB(255, 253, 171, 94),
+          seedColor: const Color(0xFFFF8E54),
+          primary: const Color(0xFFFF8E54)
         ),
         useMaterial3: true,
       ),

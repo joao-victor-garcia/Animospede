@@ -1,124 +1,101 @@
 import 'package:flutter/material.dart';
-import '../utils/my_flutter_app_icons.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+const Color backgroundColor = Color(0xFFFFFFFF);
+const Color searchBackground = Color(0xFFFAFAFA);
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
+List<Widget> cardItems = [
+  _buildCard(
+    'Belinha',
+    'São José do Rio Preto',
+    'Busco passeador no Jardim Urano',
+    'dogteste.png',
+  ),
+  _buildCard(
+    'Belinha',
+    'São José do Rio Preto',
+    'Busco passeador no Jardim Urano',
+    'dogteste.png',
+  ),
+  _buildCard(
+    'Belinha',
+    'São José do Rio Preto',
+    'Busco passeador no Jardim Urano',
+    'dogteste.png',
+  ),
+];
 
-class _HomePageState extends State<HomePage> {
-  static const Color backgroundColor = Color(0xFFFFFFFF);
-  static const Color searchBackground = Color(0xFFFAFAFA);
-  static const Color tabActiveColor = Color(0xFFFA6650);
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  List<Widget> cardItems = [
-    _buildCard('Belinha', 'São José do Rio Preto',
-        'Busco passeador no Jardim Urano', 'dogteste.png'),
-    _buildCard('Belinha', 'São José do Rio Preto',
-        'Busco passeador no Jardim Urano', 'dogteste.png'),
-    _buildCard('Belinha', 'São José do Rio Preto',
-        'Busco passeador no Jardim Urano', 'dogteste.png'),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: backgroundColor,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        title: Padding(
-          padding: const EdgeInsets.only(top: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                child: Container(
-                  color: searchBackground,
-                  width: 329,
-                  child: const TextField(
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: Color.fromRGBO(0, 0, 0, 0.25),
-                      ),
-                      hintText: 'Pesquisar',
-                      hintStyle:
-                          TextStyle(color: Color.fromRGBO(0, 0, 0, 0.25)),
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.filter_alt_outlined,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      body: Container(
-        decoration: const BoxDecoration(
-          color: backgroundColor,
-        ),
-        child: Stack(
+Widget _buildHomePage() {
+  return Scaffold(
+    appBar: AppBar(
+      backgroundColor: backgroundColor,
+      elevation: 0,
+      automaticallyImplyLeading: false,
+      title: Padding(
+        padding: const EdgeInsets.only(top: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 15),
-                  child: CarouselSlider(
-                    options: CarouselOptions(
-                      height: 200,
-                      aspectRatio: 16 / 9,
-                      viewportFraction: 0.92,
+            Flexible(
+              child: Container(
+                color: searchBackground,
+                width: 329,
+                child: const TextField(
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Color.fromRGBO(0, 0, 0, 0.25),
                     ),
-                    items: cardItems,
+                    hintText: 'Pesquisar',
+                    hintStyle: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.25)),
+                    border: InputBorder.none,
                   ),
                 ),
-              ],
-            )
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.filter_alt_outlined,
+              ),
+            ),
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(MyFlutterApp.homeicon),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(MyFlutterApp.servicesicon),
-            label: 'Serviços',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(MyFlutterApp.profileicon),
-            label: 'Perfil',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: tabActiveColor, // Cor do ícone selecionado
-        onTap: _onItemTapped,
+    ),
+    body: Container(
+      decoration: const BoxDecoration(
+        color: backgroundColor,
       ),
-    );
-  }
+      child: Stack(
+        children: [
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 15),
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                    height: 200,
+                    aspectRatio: 16 / 9,
+                    viewportFraction: 0.92,
+                  ),
+                  items: cardItems,
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    ),
+  );
 }
 
 Widget _buildCard(
-    String title, String subtitle, String text, String imagePath) {
+  String title,
+  String subtitle,
+  String text,
+  String imagePath,
+) {
   return Card(
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.center, // Alinhe verticalmente
@@ -192,4 +169,13 @@ Widget _buildCard(
       ],
     ),
   );
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key); // Adicione o parâmetro nomeado 'key'
+
+  @override
+  Widget build(BuildContext context) {
+    return _buildHomePage();
+  }
 }
