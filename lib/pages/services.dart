@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:animospede/widgets/index.dart';
 import 'package:flutter/material.dart';
 
