@@ -51,7 +51,11 @@ class _ContentPageState extends State<ContentPage> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: tabActiveColor, // Cor do ícone selecionado
+        selectedItemColor: tabActiveColor,
+        backgroundColor: Colors.white,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        elevation: 1,
         onTap: _onItemTapped,
       ),
     );
