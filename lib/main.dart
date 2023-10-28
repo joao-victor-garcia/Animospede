@@ -1,4 +1,5 @@
-import 'package:animospede/pages/splash.dart';
+import 'package:animospede/routes/index.dart';
+import 'package:animospede/screens/splash.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Poppins',
         useMaterial3: true,
       ),
-      home: const SplashPage(),
+      initialRoute: AppRoutes.splash,
+      routes: AppRoutes.routes,
     );
   }
 }
