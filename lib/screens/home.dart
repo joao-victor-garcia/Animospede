@@ -1,44 +1,52 @@
 import 'package:animospede/routes/index.dart';
+import 'package:animospede/screens/create_service.dart';
+import 'package:animospede/screens/divulgation.dart';
+import 'package:animospede/screens/profile.dart';
+import 'package:animospede/screens/service_details.dart';
 import 'package:animospede/screens/services.dart';
+import 'package:animospede/screens/solicitation.dart';
 import 'package:animospede/widgets/custom_bottom_bar.dart';
-import 'package:animospede/widgets/index.dart';
+import 'package:animospede/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-const Color backgroundColor = Color(0xFFFFFFFF);
 const Color searchBackground = Color(0xFFFAFAFA);
 
 List<Widget> cardItems = [
-  Widgets.buildCard(
-    'Belinha',
-    'São José do Rio Preto',
-    'Busco passeador no Jardim Urano',
-    'dogteste.png',
+  const CustomCard(
+    id: 1,
+    title: 'Belinha',
+    subtitle: 'São José do Rio Preto',
+    text: 'Busco passeador no Jardim Urano',
+    imagePath: 'dogteste.png',
   ),
-  Widgets.buildCard(
-    'Belinha',
-    'São José do Rio Preto',
-    'Busco passeador no Jardim Urano',
-    'dogteste.png',
+  const CustomCard(
+    id: 1,
+    title: 'Belinha',
+    subtitle: 'São José do Rio Preto',
+    text: 'Busco passeador no Jardim Urano',
+    imagePath: 'dogteste.png',
   ),
-  Widgets.buildCard(
-    'Belinha',
-    'São José do Rio Preto',
-    'Busco passeador no Jardim Urano',
-    'dogteste.png',
+  const CustomCard(
+    id: 1,
+    title: 'Belinha',
+    subtitle: 'São José do Rio Preto',
+    text: 'Busco passeador no Jardim Urano',
+    imagePath: 'dogteste.png',
   ),
-  Widgets.buildCard(
-    'Belinha',
-    'São José do Rio Preto',
-    'Busco passeador no Jardim Urano',
-    'dogteste.png',
+  const CustomCard(
+    id: 1,
+    title: 'Belinha',
+    subtitle: 'São José do Rio Preto',
+    text: 'Busco passeador no Jardim Urano',
+    imagePath: 'dogteste.png',
   ),
 ];
 
-Widget _buildHomeScreen() {
+Widget _buildHomeScreen(context) {
   return Scaffold(
     appBar: AppBar(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       elevation: 0,
       automaticallyImplyLeading: false,
       title: Padding(
@@ -73,34 +81,28 @@ Widget _buildHomeScreen() {
         ),
       ),
     ),
-    body: Container(
-      decoration: const BoxDecoration(
-        color: backgroundColor,
-      ),
-      child: Stack(
-        children: [
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: CarouselSlider(
-                  options: CarouselOptions(
-                    height: 150,
-                    aspectRatio: 16 / 9,
-                    viewportFraction: 0.92,
-                    autoPlay: true,
-                    autoPlayInterval: const Duration(seconds: 10),
-                    autoPlayAnimationDuration:
-                        const Duration(milliseconds: 300),
-                    autoPlayCurve: Curves.easeInOut,
-                  ),
-                  items: cardItems,
+    body: Stack(
+      children: [
+        Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: CarouselSlider(
+                options: CarouselOptions(
+                  height: 150,
+                  aspectRatio: 16 / 9,
+                  viewportFraction: 0.92,
+                  autoPlay: true,
+                  autoPlayInterval: const Duration(seconds: 10),
+                  autoPlayAnimationDuration: const Duration(milliseconds: 300),
+                  autoPlayCurve: Curves.easeInOut,
                 ),
+                items: cardItems,
               ),
-            ],
-          )
-        ],
-      ),
+            ),
+          ],
+        )
+      ],
     ),
   );
 }
@@ -143,18 +145,36 @@ class Home extends StatelessWidget {
       case BottomBarEnum.servicos:
         return AppRoutes.services;
       case BottomBarEnum.perfil:
-        return '/'; // AppRoutes.profile;
+        return AppRoutes.profile;
       default:
         return AppRoutes.home;
     }
   }
 
   Widget getCurrentPage(String currentRoute, BuildContext context) {
+    final routeParts = currentRoute.split('/');
+
+    if (routeParts.length >= 3 && routeParts[1] == 'serviceDetails') {
+      final serviceId = int.tryParse(routeParts[2]);
+
+      if(serviceId == null) return const DefaultWidget();
+
+      return ServiceDetails(serviceId: serviceId);
+    }
+
     switch (currentRoute) {
       case AppRoutes.home:
-        return _buildHomeScreen();
+        return _buildHomeScreen(context);
       case AppRoutes.services:
         return const Services();
+      case AppRoutes.createService:
+        return const CreateService();
+      case AppRoutes.solicitation:
+        return const Solicitation();
+      case AppRoutes.divulgation:
+        return const Divulgation();
+      case AppRoutes.profile:
+        return const Profile();
       default:
         return const DefaultWidget();
     }

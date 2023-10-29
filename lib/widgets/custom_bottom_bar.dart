@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../utils/my_flutter_app_icons.dart';
+import '../core/utils/my_flutter_app_icons.dart';
 
 enum BottomBarEnum {
   home,

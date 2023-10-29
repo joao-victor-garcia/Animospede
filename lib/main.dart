@@ -1,5 +1,4 @@
 import 'package:animospede/routes/index.dart';
-import 'package:animospede/screens/splash.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,6 +16,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFFFF8E54),
           primary: const Color(0xFFFF8E54),
+          background: const Color(0xFFFFFFFF),
         ),
         fontFamily: 'Poppins',
         useMaterial3: true,

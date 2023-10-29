@@ -1,52 +1,57 @@
-import 'package:animospede/routes/index.dart';
-import 'package:animospede/widgets/index.dart';
+import 'package:animospede/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 
-const Color backgroundColor = Color(0xFFFFFFFF);
 const Color searchBackground = Color(0xFFFAFAFA);
 
 class Servico {
+  int id;
   String title;
   String subtitle;
   String text;
   String imagePath;
 
-  Servico(this.title, this.subtitle, this.text, this.imagePath);
+  Servico(this.id, this.title, this.subtitle, this.text, this.imagePath);
 }
 
 Widget _buildServicesScreen(BuildContext context) {
   List<Servico> data = [
     Servico(
+      2,
       'Passeador de cães',
       'São José do Rio Preto',
       'Busco passeador no Jardim Urano',
       'dogteste.png',
     ),
     Servico(
+      2,
       'Passeador de cães',
       'São José do Rio Preto',
       'Busco passeador no Jardim Urano',
       'dogteste.png',
     ),
     Servico(
+      2,
       'Passeador de cães',
       'São José do Rio Preto',
       'Busco passeador no Jardim Urano',
       'dogteste.png',
     ),
     Servico(
+      2,
       'Passeador de cães',
       'São José do Rio Preto',
       'Busco passeador no Jardim Urano',
       'dogteste.png',
     ),
     Servico(
+      2,
       'Passeador de cães',
       'São José do Rio Preto',
       'Busco passeador no Jardim Urano',
       'dogteste.png',
     ),
     Servico(
+      2,
       'Passeador de cães',
       'São José do Rio Preto',
       'Busco passeador no Jardim Urano',
@@ -55,12 +60,12 @@ Widget _buildServicesScreen(BuildContext context) {
   ];
 
   void handleFloatingActionButton() {
-    Navigator.pushNamed(context, AppRoutes.serviceCreate);
+    Navigator.pushNamed(context, '/createService');
   }
 
   return Scaffold(
     appBar: AppBar(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       elevation: 0,
       automaticallyImplyLeading: false,
       title: Padding(
@@ -95,10 +100,7 @@ Widget _buildServicesScreen(BuildContext context) {
         ),
       ),
     ),
-    body: Container(
-      decoration: const BoxDecoration(
-        color: backgroundColor,
-      ),
+    body: SizedBox(
       width: double.infinity,
       child: Stack(
         children: [
@@ -130,11 +132,12 @@ Widget _buildServicesScreen(BuildContext context) {
                       return SizedBox(
                         width: double.infinity,
                         height: 150,
-                        child: Widgets.buildCard(
-                          item.title,
-                          item.subtitle,
-                          item.text,
-                          item.imagePath,
+                        child: CustomCard(
+                          id: item.id,
+                          title: item.title,
+                          subtitle: item.subtitle,
+                          text: item.text,
+                          imagePath: item.imagePath,
                         ),
                       );
                     },
