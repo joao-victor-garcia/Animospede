@@ -19,13 +19,17 @@ Widget _buildCard(
       color: const Color(0xFFF5F5FA),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(0),
+          Radius.circular(5),
         ),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(5),
+              bottomLeft: Radius.circular(5),
+            ),
             child: SizedBox(
               width: 130,
               height: double.infinity,

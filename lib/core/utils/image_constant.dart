@@ -9,13 +9,10 @@ class ImageConstant {
   static String imgGoogle = '$imagePath/img_google.svg';
 
   // My account images
-  static String imgRectangle53 = '$imagePath/img_rectangle53.png';
+  static String profileSettingsBackgroundImage = '$imagePath/profileSettingsBackgroundImage.png';
 
   static String imgSignal = '$imagePath/img_signal.svg';
-
-  static String imgEditcirclesvgrepocom =
-      '$imagePath/img_editcirclesvgrepocom.svg';
-
+  
   // Serviços (Buscar PET) images
   static String imgDownload21 = '$imagePath/img_download21.png';
 
@@ -52,20 +49,9 @@ class ImageConstant {
   static String imgUser = '$imagePath/img_user.svg';
 
   // Adverts host images
-  static String img3115812pngmarca = '$imagePath/img_3115812pngmarca.png';
+  static String capateste = '$imagePath/capateste.png';
 
-  static String imgImage5 = '$imagePath/img_image5.png';
-
-  static String imgMusicplayerap = '$imagePath/img_musicplayerap.png';
-
-  static String imgPorquepasseio = '$imagePath/img_porquepasseio.png';
-
-  static String imgMaskgroup = '$imagePath/img_maskgroup.png';
-
-  static String img3115812pngmarca106x200 =
-      '$imagePath/img_3115812pngmarca_106x200.png';
-
-  static String imgPlus = '$imagePath/img_plus.svg';
+  static String backIcon = '$imagePath/backIcon.png';
 
   // Common images
   static String img13891501 = '$imagePath/img_13891501.png';
@@ -123,7 +109,7 @@ class ImageConstant {
 
   static String imgAirplane = '$imagePath/img_airplane.svg';
 
-  static String imgSeosocialweb14x13 = '$imagePath/img_seosocialweb_14x13.png';
+  static String ratingStart = '$imagePath/ratingStart.png';
 
   static String imageNotFound = 'assets/images/image_not_found.png';
 }

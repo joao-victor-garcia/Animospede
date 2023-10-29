@@ -22,7 +22,7 @@ Widget _buildProfilePage() {
             alignment: Alignment.bottomCenter,
             children: [
               AppbarImage(
-                imagePath: ImageConstant.imgRectangle53,
+                imagePath: ImageConstant.profileSettingsBackgroundImage,
                 margin: EdgeInsets.only(bottom: 29.v),
               ),
               AppbarIconbutton(
@@ -76,36 +76,6 @@ Widget _buildProfilePage() {
                       ),
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 113.h,
-                        vertical: 4.v,
-                      ),
-                      decoration: AppDecoration.outlineBlueGray,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(height: 4.v),
-                          Container(
-                            height: 12.v,
-                            width: 8.h,
-                            decoration: BoxDecoration(
-                              border: Border(
-                                left: BorderSide(
-                                  color: appTheme.blueGray700,
-                                  width: 1.h,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -131,87 +101,60 @@ Widget _buildProfilePage() {
                         style: CustomTextStyles.bodyMediumRobotoBluegray70014,
                       ),
                     ],
-                  ),
-                  CustomImageView(
-                    svgPath: ImageConstant.imgEditcirclesvgrepocom,
-                    height: 27.adaptSize,
-                    width: 27.adaptSize,
-                    radius: BorderRadius.circular(
-                      13.h,
-                    ),
-                    margin: EdgeInsets.only(
-                      top: 14.v,
-                      bottom: 6.v,
-                    ),
-                  ),
+                  )                 
                 ],
               ),
             ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: 2.h,
-                  top: 25.v,
-                ),
-                child: Text(
-                  "Contato",
-                  style: theme.textTheme.titleMedium,
-                ),
-              ),
-            ),
-            CustomRadioButton(
-              width: 345.h,
-              text: "+55 (17) 99286-2586",
-              value: "+55 (17) 99286-2586",
-              groupValue: radioGroup,
-              margin: EdgeInsets.only(
+            Padding(
+              padding: EdgeInsets.only(
                 left: 2.h,
-                top: 3.v,
+                top: 23.v,
                 right: 4.h,
               ),
-              padding: EdgeInsets.symmetric(vertical: 4.v),
-              isRightCheck: true,
-              onChange: (value) {
-                radioGroup = value;
-              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Contato",
+                        style: theme.textTheme.titleMedium,
+                      ),
+                      SizedBox(height: 9.v),
+                      Text(
+                        "+55 (17) 99286-2586",
+                        style: CustomTextStyles.bodyMediumRobotoBluegray70014,
+                      ),
+                    ],
+                  )                 
+                ],
+              ),
             ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                height: 19.v,
-                width: 98.h,
-                margin: EdgeInsets.only(
-                  left: 2.h,
-                  top: 21.v,
-                ),
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Editar senha",
-                        style: CustomTextStyles.titleMediumMedium,
+                        Padding(
+              padding: EdgeInsets.only(
+                left: 2.h,
+                top: 23.v,
+                right: 4.h,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Senha",
+                        style: theme.textTheme.titleMedium,
                       ),
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                        height: 15.v,
-                        width: 98.h,
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(
-                              color: appTheme.blueGray700,
-                              width: 1.h,
-                            ),
-                          ),
-                        ),
+                      SizedBox(height: 9.v),
+                      Text(
+                        "**********",
+                        style: CustomTextStyles.bodyMediumRobotoBluegray70014,
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  )                 
+                ],
               ),
             ),
             CustomElevatedButton(
@@ -227,7 +170,7 @@ Widget _buildProfilePage() {
             ),
             SizedBox(height: 18.v),
             Text(
-              "Sair",
+              "Voltar",
               style: theme.textTheme.bodyLarge,
             ),
             SizedBox(height: 5.v),
