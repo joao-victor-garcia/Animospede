@@ -1,56 +1,9 @@
 import 'package:animospede/core/app_export.dart';
-import 'package:animospede/screens/services.dart';
-import 'package:animospede/widgets/custom_card.dart';
 import 'package:animospede/widgets/custom_image_view.dart';
 import 'package:flutter/material.dart';
 
 Widget _buildServiceDetailsScreen(BuildContext context, int serviceId) {
-  MediaQueryData mediaQueryData = MediaQuery.of(context);
-
-  List<Servico> data = [
-    Servico(
-      2,
-      'Passeador de cães',
-      'São José do Rio Preto',
-      'Busco passeador no Jardim Urano',
-      'dogteste.png',
-    ),
-    Servico(
-      2,
-      'Passeador de cães',
-      'São José do Rio Preto',
-      'Busco passeador no Jardim Urano',
-      'dogteste.png',
-    ),
-    Servico(
-      2,
-      'Passeador de cães',
-      'São José do Rio Preto',
-      'Busco passeador no Jardim Urano',
-      'dogteste.png',
-    ),
-    Servico(
-      2,
-      'Passeador de cães',
-      'São José do Rio Preto',
-      'Busco passeador no Jardim Urano',
-      'dogteste.png',
-    ),
-    Servico(
-      2,
-      'Passeador de cães',
-      'São José do Rio Preto',
-      'Busco passeador no Jardim Urano',
-      'dogteste.png',
-    ),
-    Servico(
-      2,
-      'Passeador de cães',
-      'São José do Rio Preto',
-      'Busco passeador no Jardim Urano',
-      'dogteste.png',
-    ),
-  ];
+  MediaQueryData mediaQueryData = MediaQuery.of(context);  
 
   return SafeArea(
     child: Scaffold(

@@ -3,13 +3,9 @@ import 'package:animospede/widgets/app_bar/appbar_iconbutton.dart';
 import 'package:animospede/widgets/app_bar/appbar_image.dart';
 import 'package:animospede/widgets/app_bar/custom_app_bar.dart';
 import 'package:animospede/widgets/custom_elevated_button.dart';
-import 'package:animospede/widgets/custom_image_view.dart';
-import 'package:animospede/widgets/custom_radio_button.dart';
 import 'package:flutter/material.dart';
 
 Widget _buildProfilePage() {
-  String radioGroup = "";
-
   return SafeArea(
     child: Scaffold(
       appBar: CustomAppBar(
