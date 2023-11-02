@@ -174,7 +174,7 @@ class Home extends StatelessWidget {
       case AppRoutes.divulgation:
         return const Divulgation();
       case AppRoutes.profile:
-        return const Profile();
+        return Profile();
       default:
         return const DefaultWidget();
     }

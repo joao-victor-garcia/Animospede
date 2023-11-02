@@ -1,248 +1,411 @@
-import 'package:animospede/core/app_export.dart';
+import 'package:flutter/material.dart';
 import 'package:animospede/widgets/app_bar/appbar_iconbutton.dart';
 import 'package:animospede/widgets/app_bar/appbar_image.dart';
 import 'package:animospede/widgets/app_bar/custom_app_bar.dart';
 import 'package:animospede/widgets/custom_elevated_button.dart';
 import 'package:animospede/widgets/custom_image_view.dart';
 import 'package:animospede/widgets/custom_radio_button.dart';
-import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
-Widget _buildProfilePage() {
+class Profile extends StatefulWidget {
+  const Profile({Key? key}) : super(key: key);
+
+  @override
+  _ProfileState createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  ImagePicker picker = ImagePicker();
+  PickedFile? profileImage;
+  PickedFile? backgroundImage;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
   String radioGroup = "";
+  final data = {
+    'phoneNumber': '+55 (17) 99286-2586',
+    'name': "Matheus Henrique",
+    'email': "matheus.barreto@fatec.sp.gov.br",
+    'profileImage': AssetImage('dogprofile.jpg'),
+    'backgroundImage': AssetImage('background.jpg'),
+  };
 
-  return SafeArea(
-    child: Scaffold(
-      appBar: CustomAppBar(
-        height: 125.v,
-        centerTitle: true,
-        title: SizedBox(
-          height: 125.v,
-          width: double.maxFinite,
-          child: Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              AppbarImage(
-                imagePath: ImageConstant.imgRectangle53,
-                margin: EdgeInsets.only(bottom: 29.v),
-              ),
-              AppbarIconbutton(
-                svgPath: ImageConstant.imgSignal,
+  Map<String, bool> isEditing = {
+    'name': false,
+    'email': false,
+    'phoneNumber': false,
+  };
+
+  @override
+  void initState() {
+    super.initState();
+    nameController.text = data["name"] as String;
+    emailController.text = data["email"] as String;
+    phoneNumberController.text = data["phoneNumber"] as String;
+    radioGroup = data["phoneNumber"] as String;
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    phoneNumberController.dispose();
+    super.dispose();
+  }
+
+  Widget buildEditableField({
+    required String label,
+    required String value,
+    required TextEditingController controller,
+    required bool isEditing,
+    required String fieldName,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 9),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: isEditing
+                  ? TextFormField(
+                      controller: controller,
+                      style: TextStyle(fontSize: 16),
+                    )
+                  : Text(
+                      value,
+                      style: TextStyle(fontSize: 16),
+                    ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  // Atualize a variável isEditing correta no mapa com base no nome do campo
+                  isEditingMap[fieldName] = !isEditing;
+                });
+              },
+              child: CustomImageView(
+                svgPath: 'assets/img_editcirclesvgrepocom.svg',
+                height: 27,
+                width: 27,
+                radius: BorderRadius.circular(13),
                 margin: EdgeInsets.only(
-                  left: 152.h,
-                  top: 54.v,
-                  right: 152.h,
+                  top: 14,
+                  bottom: 6,
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
-      body: Container(
-        width: double.maxFinite,
-        padding: EdgeInsets.symmetric(
-          horizontal: 12.h,
-          vertical: 23.v,
-        ),
-        child: Column(
-          children: [
-            Text(
-              "Minha conta",
-              style: theme.textTheme.headlineSmall,
             ),
-            SizedBox(height: 43.v),
-            SizedBox(
-              height: 45.v,
-              width: 350.h,
-              child: Stack(
-                alignment: Alignment.bottomLeft,
-                children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 1.h),
-                      child: Text(
-                        "Nome",
-                        style: theme.textTheme.titleMedium,
+          ],
+        ),
+      ],
+    );
+  }
+
+  Map<String, bool> isEditingMap = {
+    'name': false,
+    'email': false,
+    'phoneNumber': false,
+  };
+
+  Future<File> saveImageToDisk(File image) async {
+    final localPath = r'C:\Users\User\Documents\Animospede\assets';
+    final fileName = 'profileimage.png';
+
+    print(image.path);
+    final localFile = File('$localPath\\$fileName');
+    print(localFile);
+    try {
+      await localFile.writeAsBytes(await image.readAsBytes());
+    } catch (e) {
+      print('Error writing file: $e');
+      // Trate o erro conforme necessário, por exemplo, mostrando uma mensagem de erro ao usuário.
+    }
+    print(image);
+    return localFile;
+  }
+
+  File? selectedImage;
+  bool isEditingImage = false;
+  TextEditingController imagePathController = TextEditingController();
+
+// Função para abrir a galeria e escolher uma imagem
+  void pickImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    print('entro no pick');
+    if (pickedFile != null) {
+      final file = File(pickedFile.path);
+      setState(() {
+        selectedImage = file;
+        print(selectedImage);
+
+        isEditingImage = true;
+      });
+    }
+  }
+
+// Função para salvar a imagem e exibir o caminho
+  void saveImage() async {
+    if (selectedImage != null) {
+      print("entro");
+      final savedImage = await saveImageToDisk(selectedImage!);
+      setState(() {
+        print("inmg: ${savedImage.path}");
+        imagePathController.text = savedImage.path;
+        isEditingImage = false;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        appBar: CustomAppBar(
+          height: 241, // Defina a altura do appBar para 241 pixels
+          centerTitle: true,
+          title: SizedBox(
+            height: 241, // Defina a altura do título do appBar para 241 pixels
+            width: double.maxFinite,
+            child: Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                Stack(
+                  alignment: AlignmentDirectional.bottomCenter,
+                  children: [
+                    // Plano de fundo com ícone
+                    Container(
+                      margin: EdgeInsets.only(bottom: 50),
+                      width: double.infinity,
+                      height:
+                          241, // Defina a altura do plano de fundo para 241 pixels
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: data['backgroundImage'] as ImageProvider,
+                          fit: BoxFit.cover,
+                          alignment: Alignment.center,
+                        ),
+                        color: Colors.black.withOpacity(0.7),
                       ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 1.h),
-                      child: Text(
-                        "Matheus Henrique",
-                        style: CustomTextStyles.bodyMediumRobotoBluegray70014,
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 113.h,
-                        vertical: 4.v,
-                      ),
-                      decoration: AppDecoration.outlineBlueGray,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      child: Stack(
                         children: [
-                          SizedBox(height: 4.v),
-                          Container(
-                            height: 12.v,
-                            width: 8.h,
-                            decoration: BoxDecoration(
-                              border: Border(
-                                left: BorderSide(
-                                  color: appTheme.blueGray700,
-                                  width: 1.h,
-                                ),
+                          // Adicione seu ícone ao plano de fundo aqui
+                          Positioned(
+                            left: 10, // Ajuste a posição conforme necessário
+                            top: 10, // Ajuste a posição conforme necessário
+                            child: CustomImageView(
+                              svgPath: 'assets/img_editcirclesvgrepocom.svg',
+                              height: 40,
+                              width: 40,
+                              radius: BorderRadius.circular(13),
+                              margin: EdgeInsets.only(
+                                top: 14,
+                                bottom: 6,
                               ),
                             ),
                           ),
                         ],
                       ),
                     ),
-                  ),
-                ],
-              ),
+                    // Perfil com ícone
+                    // Perfil com ícone
+                    Container(
+                      width: 131,
+                      height: 131,
+                      child: Stack(
+                        alignment: Alignment.bottomRight,
+                        children: [
+                          Container(
+                            width: 131,
+                            height: 131,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: profileImage != null
+                                    ? FileImage(File(profileImage!.path))
+                                    : data['profileImage'] as ImageProvider,
+                                fit: BoxFit.cover,
+                              ),
+                              border: Border.all(
+                                color: Colors.white,
+                                width: 8,
+                              ),
+                            ),
+                          ),
+                          // Ícone de edição azul abaixo da foto
+                          Container(
+                            height: 40, // Altura desejada
+                            width: 40, // Largura desejada
+                            child: Stack(
+                              children: [
+                                // Adicione seu ícone ao plano de fundo aqui
+                                Positioned(
+                                  child: CustomImageView(
+                                    svgPath:
+                                        'assets/img_editcirclesvgrepocom.svg',
+                                    height: 40,
+                                    width: 40,
+                                    radius: BorderRadius.circular(13),
+                                  ),
+                                ),
+
+                                // Adicione o GestureDetector diretamente na foto
+                                GestureDetector(
+                                  onTap: pickImage,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ],
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                left: 2.h,
-                top: 23.v,
-                right: 4.h,
+          ),
+        ),
+        body: Container(
+          width: double.maxFinite,
+          padding: EdgeInsets.symmetric(
+            horizontal: 12,
+            vertical: 23,
+          ),
+          child: Column(
+            children: [
+              Text(
+                "Minha conta",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+              SizedBox(height: 43),
+              buildEditableField(
+                label: "Nome",
+                value: data["name"] as String,
+                controller: nameController,
+                isEditing: isEditingMap['name'] ?? false,
+                fieldName: 'name',
+              ),
+              buildEditableField(
+                label: "E-mail",
+                value: data["email"] as String,
+                controller: emailController,
+                isEditing: isEditingMap['email'] ?? false,
+                fieldName: 'email',
+              ),
+              buildEditableField(
+                label: "Contato",
+                value: data["phoneNumber"] as String,
+                controller: phoneNumberController,
+                isEditing: isEditingMap['phoneNumber'] ?? false,
+                fieldName: 'phoneNumber',
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  height: 19,
+                  width: 98,
+                  margin: EdgeInsets.only(
+                    left: 2,
+                    top: 21,
+                  ),
+                  child: Stack(
+                    alignment: Alignment.center,
                     children: [
-                      Text(
-                        "E-mail",
-                        style: theme.textTheme.titleMedium,
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Editar senha",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
                       ),
-                      SizedBox(height: 9.v),
-                      Text(
-                        "matheus.barreto@fatec.sp.gov.br",
-                        style: CustomTextStyles.bodyMediumRobotoBluegray70014,
-                      ),
-                    ],
-                  ),
-                  CustomImageView(
-                    svgPath: ImageConstant.imgEditcirclesvgrepocom,
-                    height: 27.adaptSize,
-                    width: 27.adaptSize,
-                    radius: BorderRadius.circular(
-                      13.h,
-                    ),
-                    margin: EdgeInsets.only(
-                      top: 14.v,
-                      bottom: 6.v,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: 2.h,
-                  top: 25.v,
-                ),
-                child: Text(
-                  "Contato",
-                  style: theme.textTheme.titleMedium,
-                ),
-              ),
-            ),
-            CustomRadioButton(
-              width: 345.h,
-              text: "+55 (17) 99286-2586",
-              value: "+55 (17) 99286-2586",
-              groupValue: radioGroup,
-              margin: EdgeInsets.only(
-                left: 2.h,
-                top: 3.v,
-                right: 4.h,
-              ),
-              padding: EdgeInsets.symmetric(vertical: 4.v),
-              isRightCheck: true,
-              onChange: (value) {
-                radioGroup = value;
-              },
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                height: 19.v,
-                width: 98.h,
-                margin: EdgeInsets.only(
-                  left: 2.h,
-                  top: 21.v,
-                ),
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Editar senha",
-                        style: CustomTextStyles.titleMediumMedium,
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                        height: 15.v,
-                        width: 98.h,
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(
-                              color: appTheme.blueGray700,
-                              width: 1.h,
+                      Align(
+                        alignment: Alignment.center,
+                        child: Container(
+                          height: 15,
+                          width: 98,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Colors.grey,
+                                width: 1,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-            CustomElevatedButton(
-              height: 59.v,
-              text: "Salvar",
-              margin: EdgeInsets.only(
-                left: 18.h,
-                top: 62.v,
-                right: 18.h,
+              CustomElevatedButton(
+                height: 59,
+                text: "Salvar",
+                margin: EdgeInsets.only(
+                  left: 18,
+                  top: 42,
+                  right: 18,
+                ),
+                buttonTextStyle: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+                buttonStyle: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Color(0xFFFA6650)), // Cor de fundo
+                ),
+                onTap: () {
+                  saveImage();
+                  // Exibir campos atuais em um console.log
+                  print("Nome: ${nameController.text}");
+                  print("E-mail: ${emailController.text}");
+                  print("Contato: ${phoneNumberController.text}");
+
+                  // Ou mostrar um alerta com os valores atuais
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text("Valores Atuais"),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Nome: ${nameController.text}"),
+                            Text("E-mail: ${emailController.text}"),
+                            Text("Contato: ${phoneNumberController.text}"),
+                          ],
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text("OK"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
               ),
-              buttonStyle: CustomButtonStyles.outlineIndigo,
-              buttonTextStyle: CustomTextStyles.titleMediumPoppinsWhiteA700,
-            ),
-            SizedBox(height: 18.v),
-            Text(
-              "Sair",
-              style: theme.textTheme.bodyLarge,
-            ),
-            SizedBox(height: 5.v),
-          ],
+              SizedBox(height: 18),
+              Text(
+                "Sair",
+                style: TextStyle(fontSize: 18),
+              ),
+            ],
+          ),
         ),
       ),
-    ),
-  );
-}
-
-class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return _buildProfilePage();
+    );
   }
 }
