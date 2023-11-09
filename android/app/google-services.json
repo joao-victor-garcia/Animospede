@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "796093349295",
+    "project_id": "animospede",
+    "storage_bucket": "animospede.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:796093349295:android:3749d3e4081fc71145c35a",
+        "android_client_info": {
+          "package_name": "com.example.animospede"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQuF-drEoi5jnfzN4hQG53xBBSjt2rbe8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

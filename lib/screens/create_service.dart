@@ -13,6 +13,9 @@ Widget _buildServiceScreen(context) {
 
   return SafeArea(
     child: Scaffold(
+      appBar: AppBar(
+        leadingWidth: 50,
+      ),
       body: SizedBox(
         width: double.maxFinite,
         child: Column(

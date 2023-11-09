@@ -1,3 +1,4 @@
+import 'package:animospede/screens/create_service.dart';
 import 'package:animospede/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 
@@ -123,7 +124,7 @@ Widget _buildServicesScreen(BuildContext context) {
                   height: 10,
                 ),
                 SizedBox(
-                  height: 490,
+                  height: 700,
                   child: ListView.builder(
                     itemCount: data.length,
                     itemBuilder: (context, index) {
@@ -150,7 +151,15 @@ Widget _buildServicesScreen(BuildContext context) {
       ),
     ),
     floatingActionButton: FloatingActionButton(
-      onPressed: handleFloatingActionButton,
+      onPressed: () {
+        // Ação a ser realizada quando o botão for pressionado
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CreateService()),
+        );
+      },
+      tooltip: 'Adicionar ou serviço ou solicitação',
+
       shape: const CircleBorder(),
       backgroundColor: Theme.of(context).colorScheme.primary,
       child: const Icon(

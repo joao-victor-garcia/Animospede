@@ -1,11 +1,13 @@
 import 'package:animospede/core/app_export.dart';
+import 'package:animospede/screens/configlist.dart';
 import 'package:animospede/widgets/app_bar/appbar_iconbutton.dart';
 import 'package:animospede/widgets/app_bar/appbar_image.dart';
+import 'package:animospede/utils/image_constant.dart';
 import 'package:animospede/widgets/app_bar/custom_app_bar.dart';
 import 'package:animospede/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 
-Widget _buildProfilePage() {
+Widget _buildProfilePage(context) {
   return SafeArea(
     child: Scaffold(
       appBar: CustomAppBar(
@@ -18,11 +20,11 @@ Widget _buildProfilePage() {
             alignment: Alignment.bottomCenter,
             children: [
               AppbarImage(
-                imagePath: ImageConstant.profileSettingsBackgroundImage,
+                imagePath: 'assets/profileSettingsBackgroundImage.png',
                 margin: EdgeInsets.only(bottom: 29.v),
               ),
               AppbarIconbutton(
-                svgPath: ImageConstant.imgSignal,
+                svgPath: 'assets/img_signal.svg',
                 margin: EdgeInsets.only(
                   left: 152.h,
                   top: 54.v,
@@ -165,9 +167,17 @@ Widget _buildProfilePage() {
               buttonTextStyle: CustomTextStyles.titleMediumPoppinsWhiteA700,
             ),
             SizedBox(height: 18.v),
-            Text(
-              "Voltar",
-              style: theme.textTheme.bodyLarge,
+            GestureDetector(
+              onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ConfigList()));
+                      },
+              child: Text(
+                "Voltar",
+                style: theme.textTheme.bodyLarge,
+              ),
             ),
             SizedBox(height: 5.v),
           ],
@@ -182,6 +192,6 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _buildProfilePage();
+    return _buildProfilePage(context);
   }
 }

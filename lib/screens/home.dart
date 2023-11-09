@@ -1,4 +1,5 @@
 import 'package:animospede/routes/index.dart';
+import 'package:animospede/screens/configlist.dart';
 import 'package:animospede/screens/create_service.dart';
 import 'package:animospede/screens/divulgation.dart';
 import 'package:animospede/screens/profile.dart';
@@ -145,7 +146,7 @@ class Home extends StatelessWidget {
       case BottomBarEnum.servicos:
         return AppRoutes.services;
       case BottomBarEnum.perfil:
-        return AppRoutes.profile;
+        return AppRoutes.configlist;
       default:
         return AppRoutes.home;
     }
@@ -157,7 +158,7 @@ class Home extends StatelessWidget {
     if (routeParts.length >= 3 && routeParts[1] == 'serviceDetails') {
       final serviceId = int.tryParse(routeParts[2]);
 
-      if(serviceId == null) return const DefaultWidget();
+      if (serviceId == null) return const DefaultWidget();
 
       return ServiceDetails(serviceId: serviceId);
     }
@@ -170,11 +171,11 @@ class Home extends StatelessWidget {
       case AppRoutes.createService:
         return const CreateService();
       case AppRoutes.solicitation:
-        return const Solicitation();
+        return const Solicitations();
       case AppRoutes.divulgation:
         return const Divulgation();
       case AppRoutes.profile:
-        return const Profile();
+        return const ConfigList();
       default:
         return const DefaultWidget();
     }
