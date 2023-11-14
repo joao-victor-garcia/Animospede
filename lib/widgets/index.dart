@@ -1,7 +1,7 @@
 import 'dart:js';
 import 'dart:math';
 
-import 'package:animospede/screens/profile.dart';
+import 'package:animospede/screens/account.dart';
 import 'package:flutter/material.dart';
 import 'package:animospede/main.dart';
 

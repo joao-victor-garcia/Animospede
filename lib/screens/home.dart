@@ -2,7 +2,6 @@ import 'package:animospede/routes/index.dart';
 import 'package:animospede/screens/configlist.dart';
 import 'package:animospede/screens/create_service.dart';
 import 'package:animospede/screens/divulgation.dart';
-import 'package:animospede/screens/profile.dart';
 import 'package:animospede/screens/service_details.dart';
 import 'package:animospede/screens/services.dart';
 import 'package:animospede/screens/solicitation.dart';

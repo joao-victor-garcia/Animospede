@@ -39,9 +39,8 @@ Widget _buildSolicitationsScreen(BuildContext context) {
 
   return Scaffold(
     appBar: AppBar(
+      leadingWidth: 50,
       backgroundColor: Theme.of(context).colorScheme.background,
-      elevation: 0,
-      automaticallyImplyLeading: false,
     ),
     body: SizedBox(
       width: double.infinity,

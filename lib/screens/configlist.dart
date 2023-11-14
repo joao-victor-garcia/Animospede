@@ -1,7 +1,5 @@
-import 'dart:js';
-
 import 'package:animospede/core/app_export.dart';
-import 'package:animospede/screens/profile.dart';
+import 'package:animospede/screens/account.dart';
 import 'package:animospede/screens/services_request.dart';
 import 'package:animospede/screens/solicitation.dart';
 import 'package:animospede/widgets/app_bar/appbar_iconbutton.dart';
@@ -14,9 +12,7 @@ import 'package:animospede/screens/services_advertising_list.dart';
 
 Widget _buildConfigListPage(context) {
   return Scaffold(
-      appBar: AppBar(
-        leadingWidth: 50,
-      ),
+      
       body: Row(
         children: [
           Padding(
@@ -107,7 +103,7 @@ Widget _buildConfigListPage(context) {
                   child: GestureDetector(
                       onTap: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Profile()));
+                            MaterialPageRoute(builder: (context) => Account()));
                       },
                       child: Icon(Icons.arrow_forward_ios_sharp)),
                 ),

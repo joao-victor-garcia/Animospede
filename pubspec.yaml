@@ -7,6 +7,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  image_picker: ^0.8.4+4  
   carousel_slider: ^4.0.0
   cupertino_icons: ^1.0.2
   passwordfield: ^0.2.0
