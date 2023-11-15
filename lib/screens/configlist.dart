@@ -1,5 +1,6 @@
 import 'package:animospede/core/app_export.dart';
 import 'package:animospede/screens/account.dart';
+import 'package:animospede/screens/login.dart';
 import 'package:animospede/screens/services_request.dart';
 import 'package:animospede/screens/solicitation.dart';
 import 'package:animospede/widgets/app_bar/appbar_iconbutton.dart';
@@ -59,7 +60,7 @@ Widget _buildConfigListPage(context) {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
+                 const Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Minha conta',
@@ -67,7 +68,7 @@ Widget _buildConfigListPage(context) {
                     textAlign: TextAlign.left,
                   ),
                 ),
-                Padding(
+                const Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Ver perfil de serviços',
@@ -75,9 +76,9 @@ Widget _buildConfigListPage(context) {
                     textAlign: TextAlign.left,
                   ),
                 ),
-                Padding(
+                const Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(
+                  child:  Text(
                     'Ver solicitações',
                     style: TextStyle(fontSize: 20),
                     textAlign: TextAlign.left,
@@ -85,10 +86,15 @@ Widget _buildConfigListPage(context) {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'Sair',
-                    style: TextStyle(color: Colors.red, fontSize: 20),
-                    textAlign: TextAlign.left,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: ((context) => Login())));
+                    },
+                    child: const Text(
+                      'Sair',
+                      style: TextStyle(color: Colors.red, fontSize: 20),
+                      textAlign: TextAlign.left,
+                    ),
                   ),
                 ),
               ],

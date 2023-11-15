@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 
-class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+class Login extends StatefulWidget {
+  const Login({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return _buildLoginScreen(context);
-  }
+  State<Login> createState() => _LoginState();
 }
 
-Widget _buildLoginScreen(BuildContext context) {
+
+class _LoginState extends State<Login> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _senhaController = TextEditingController();
+  final TextEditingController _confirmaController = TextEditingController();
+
+  bool isEntrando = true;
+
+  final _formKey = GlobalKey<FormState>();
+
+Widget build(BuildContext context) {
   Color fieldColor = const Color.fromRGBO(255, 255, 255, 0.25);
   double borderRadius = 10;
 
@@ -53,7 +61,8 @@ Widget _buildLoginScreen(BuildContext context) {
                     const SizedBox(
                       height: 20,
                     ),
-                    TextField(
+                    TextFormField(
+                      controller: _emailController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(borderRadius),
@@ -77,11 +86,22 @@ Widget _buildLoginScreen(BuildContext context) {
                         color: Colors.white,
                       ),
                       cursorColor: Colors.white,
-                    ),
+                      validator: ((value) {
+                        if(value==null||value==""){
+                          return "O valor de e-mail deve ser preenchido";
+                        }
+                        if (!value.contains("@") ||
+                            !value.contains(".") ||
+                            value.length < 4) {
+                          return "O valor do e-mail deve ser válido";
+                        }
+                        return null;
+                      }
+                    ),),
                     const SizedBox(
                       height: 7,
                     ),
-                    TextField(
+                    TextFormField(
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(borderRadius),
@@ -106,12 +126,19 @@ Widget _buildLoginScreen(BuildContext context) {
                       ),
                       cursorColor: Colors.white,
                       obscureText: true,
+                      controller: _senhaController,
+                      validator: (value) {
+                        if (value == null || value.length < 4) {
+                          return "Insira uma senha válida.";
+                        }
+                        return null;
+                      },
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     ElevatedButton(
-                      onPressed: handleLogin,
+                      onPressed: botaoEnviarClicado,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).colorScheme.primary,
                         foregroundColor: Colors.white,
@@ -176,4 +203,15 @@ Widget _buildLoginScreen(BuildContext context) {
       ],
     ),
   );
+}
+
+  botaoEnviarClicado() {
+    String email = _emailController.text;
+    String senha = _senhaController.text;
+  }
+
+  _entrarUsuario({required String email, required String senha}) {
+    print("Entrar usuário $email, $senha");
+  }
+
 }
