@@ -1,6 +1,7 @@
+import 'package:animospede/authentication/services/auth_service.dart';
 import 'package:animospede/core/app_export.dart';
 import 'package:animospede/screens/account.dart';
-import 'package:animospede/screens/login.dart';
+import 'package:animospede/authentication/screens/login.dart';
 import 'package:animospede/screens/services_request.dart';
 import 'package:animospede/screens/solicitation.dart';
 import 'package:animospede/widgets/app_bar/appbar_iconbutton.dart';
@@ -10,6 +11,7 @@ import 'package:animospede/widgets/custom_elevated_button.dart';
 import 'package:animospede/widgets/custom_image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:animospede/screens/services_advertising_list.dart';
+import 'package:animospede/screens/splash.dart';
 
 Widget _buildConfigListPage(context) {
   return Scaffold(
@@ -90,10 +92,15 @@ Widget _buildConfigListPage(context) {
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(builder: ((context) => Login())));
                     },
-                    child: const Text(
-                      'Sair',
-                      style: TextStyle(color: Colors.red, fontSize: 20),
-                      textAlign: TextAlign.left,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/splash');
+                      },
+                      child: const Text(
+                        'Sair',
+                        style: TextStyle(color: Colors.red, fontSize: 20),
+                        textAlign: TextAlign.left,
+                      ),
                     ),
                   ),
                 ),

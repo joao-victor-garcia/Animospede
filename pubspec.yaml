@@ -8,7 +8,7 @@ dependencies:
   flutter:
     sdk: flutter
   image_picker: ^0.8.4+4  
-  carousel_slider: ^4.0.0
+  carousel_slider: ^4.2.1
   cupertino_icons: ^1.0.2
   passwordfield: ^0.2.0
   cached_network_image: ^3.2.1
@@ -17,6 +17,7 @@ dependencies:
   firebase_core: ^2.21.0
   cloud_firestore: ^4.12.2
   firebase_auth: ^4.14.0
+    
 dev_dependencies:
   flutter_test:
     sdk: flutter

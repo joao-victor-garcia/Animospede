@@ -1,9 +1,9 @@
 import 'package:animospede/screens/create_service.dart';
 import 'package:animospede/screens/divulgation.dart';
 import 'package:animospede/screens/home.dart';
-import 'package:animospede/screens/login.dart';
+import 'package:animospede/authentication/screens/login.dart';
 import 'package:animospede/screens/account.dart';
-import 'package:animospede/screens/register.dart';
+import 'package:animospede/authentication/screens/register.dart';
 import 'package:animospede/screens/services.dart';
 import 'package:animospede/screens/solicitation.dart';
 import 'package:animospede/screens/splash.dart';

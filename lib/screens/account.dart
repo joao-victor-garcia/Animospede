@@ -1,3 +1,4 @@
+import 'package:animospede/authentication/services/auth_service.dart';
 import 'package:animospede/screens/configlist.dart';
 import 'package:flutter/material.dart';
 import 'package:animospede/widgets/app_bar/appbar_iconbutton.dart';
@@ -10,12 +11,26 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:flutter/foundation.dart' show kIsWeb;
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 class Account extends StatefulWidget {
   const Account({Key? key}) : super(key: key);
 
   @override
   _AccountState createState() => _AccountState();
+}
+
+Future<UserCredential?> signInWithEmailAndPassword(
+    String email, String password) async {
+  try {
+    UserCredential userCredential = await FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: email, password: password);
+
+    // Retorna o UserCredential, que contém informações sobre o usuário autenticado
+    return userCredential;
+  } catch (e) {
+    print('Erro ao fazer login: $e');
+    return null;
+  }
 }
 
 class _AccountState extends State<Account> {
@@ -317,7 +332,6 @@ class _AccountState extends State<Account> {
                     top: 21,
                   ),
                   child: Stack(
-
                     alignment: Alignment.center,
                     children: [
                       Align(
@@ -403,16 +417,25 @@ class _AccountState extends State<Account> {
               SizedBox(height: 18),
               GestureDetector(
                 onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ConfigList()));
-                      },
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ConfigList()));
+                },
                 child: Text(
                   "Voltar",
                   style: TextStyle(fontSize: 18),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: GestureDetector(
+                  onTap: () {
+                    AuthService().removerConta();
+                  },
+                    child: Text(
+                  "Deletar conta",
+                  style: TextStyle(color: Colors.red),
+                )),
+              )
             ],
           ),
         ),
